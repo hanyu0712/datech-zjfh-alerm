@@ -1,0 +1,52 @@
+spring:
+  task:
+    scheduling:
+      pool:
+        size: 10
+      thread-name-prefix: datech-schedul
+    execution:
+      shutdown:
+        #        线程关闭时是否等所有任务结束
+        await-termination: false
+        #        线程最大的等待时间，防止线程陷入循环关不掉
+        await-termination-period: 10s
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://datarnd-mysql:3306/datech_zjfh?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: mysql123qwe
+  redis:
+    database: 0
+    host: datarnd-redis
+    port: 6379
+    password: redis123qwe
+
+server:
+  port: 9026
+  ssl:
+    key-alias: datech
+    key-store-password: datech123
+    key-store-type: PKCS12
+    key-store: classpath:datech.p12
+
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml #扫描mapper下的所有xml文件
+  type-aliases-package: com.datech.zjfh.alarm.entity   #扫描实体类包/配置别名
+  configuration:
+    # 是否开启自动驼峰命名规则映射:从数据库列名到Java属性驼峰命名的类似映射
+    map-underscore-to-camel-case: true
+    # 如果查询结果中包含空值的列，则 MyBatis 在映射的时候，不会映射这个字段
+    call-setters-on-nulls: true
+    # 这个配置会将执行的sql打印出来，在开发或测试的时候可以用
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+ivs1800:
+  url: https://172.10.60.6:18531
+  username: datarnd
+  password: Datarnd@234
+
+
+
+
+
+

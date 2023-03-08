@@ -1,0 +1,8 @@
+version: "3"
+
+services:
+  zjfh-alarm:
+    image: datech/zjfh-alarm:1.0
+    ports:
+      - "9016:9016"
+      - "9026:9026"
