@@ -1,32 +1,60 @@
 spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://datarnd-mysql:3306/datech_zjfh?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: mysql123qwe
+#  shardingsphere:
+#    datasource:
+#      master:
+#        type: com.zaxxer.hikari.HikariDataSource
+#        driverClassName: com.mysql.cj.jdbc.Driver
+#        jdbcUrl: jdbc:mysql://mysql8-master1:3306/datech_zjfh?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+#        username: root
+#        password: 123456
+#      slave0:
+#        type: com.zaxxer.hikari.HikariDataSource
+#        driverClassName: com.mysql.cj.jdbc.Driver
+#        jdbcUrl: jdbc:mysql://mysql8-slave1:3306/datech_zjfh?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+#        username: root
+#        password: 123456
+#      names: master,slave0
+#    props:
+#      sql.show: true
+#    masterslave:
+#      load-balance-algorithm-type: round_robin
+#    sharding:
+#      master-slave-rules:
+#        master:
+#          master-data-source-name: master
+#          slave-data-source-names: slave0
+  redis:
+    database: 0
+    host: datarnd-redis
+    port: 6379
+    password: redis123qwe
+#  redis:
+#    password: redis123qwe
+#    lettuce:
+#      pool:
+#        max-active: 8
+#        max-wait: -1
+#        max-idle: 8
+#        min-idle: 0
+#      database: 0
+#    sentinel:
+#      master: mymaster
+#      nodes: redis-sentinel-1:26379,redis-sentinel-2:26380,redis-sentinel-3:26381
   task:
     scheduling:
       pool:
         size: 10
       thread-name-prefix: datech-schedul
     execution:
-      shutdown:
-        #        线程关闭时是否等所有任务结束
+      shutdown: #        线程关闭时是否等所有任务结束
         await-termination: false
         #        线程最大的等待时间，防止线程陷入循环关不掉
         await-termination-period: 10s
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://datarnd-mysql:3306/datech_zjfh?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
-    username: root
-    password: mysql123qwe
-  redis:
-    password: redis123qwe
-    lettuce:
-      pool:
-        max-active: 8
-        max-wait: -1
-        max-idle: 8
-        min-idle: 0
-      database: 0
-    sentinel:
-      master: mymaster
-      nodes: redis-sentinel-1:26379,redis-sentinel-2:26380,redis-sentinel-3:26381
 
 server:
   port: 9026
@@ -39,8 +67,7 @@ server:
 mybatis-plus:
   mapper-locations: classpath:mapper/*.xml #扫描mapper下的所有xml文件
   type-aliases-package: com.datech.zjfh.alarm.entity   #扫描实体类包/配置别名
-  configuration:
-    # 是否开启自动驼峰命名规则映射:从数据库列名到Java属性驼峰命名的类似映射
+  configuration: # 是否开启自动驼峰命名规则映射:从数据库列名到Java属性驼峰命名的类似映射
     map-underscore-to-camel-case: true
     # 如果查询结果中包含空值的列，则 MyBatis 在映射的时候，不会映射这个字段
     call-setters-on-nulls: true
